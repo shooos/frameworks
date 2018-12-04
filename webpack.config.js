@@ -20,7 +20,7 @@ module.exports = {
 
   resolve: {
     modules: ['node_modules', path.join(__dirname, 'src')],
-    extensions: ['*', '.js', '.jsx'],
+    extensions: ['*', '.js', '.jsx', '.ts'],
   },
 
   module: {
@@ -42,6 +42,11 @@ module.exports = {
           presets: ['@babel/preset-env', '@babel/preset-react'],
           plugins: ['@babel/plugin-transform-regenerator', '@babel/plugin-proposal-class-properties'],
         },
+      },
+      {
+        test: /.ts$/,
+        exclude: /node_modules/,
+        loader: 'ts-loader',
       },
       {
         test: /\.vue$/,

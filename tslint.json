@@ -1,0 +1,34 @@
+{
+  "rulesDirectory": ["tslint-plugin-prettier"],
+  "extends": ["tslint-config-standard", "tslint-config-prettier"],
+  "rules": {
+    "prettier": [
+      true,
+      {
+        "arrowParens": "always",
+        "bracketSpacing": false,
+        "jsxBracketSameLine": false,
+        "printWidth": 120,
+        "semi": true,
+        "singleQuote": true,
+        "tabWidth": 2,
+        "trailingComma": "es5",
+        "useTabs": false
+      }
+    ],
+    "block-spacing": [true, "never"],
+    "no-any": true,
+    "no-switch-case-fall-through": false,
+    "no-unnecessary-initializer": true,
+    "no-unsafe-any": true,
+    "object-curly-spacing": [true, "never"],
+    "semicolon": [true, "always"],
+    "trailing-comma": [
+      true,
+      {
+        "multiline": "always",
+        "singleline": "never"
+      }
+    ]
+  }
+}
