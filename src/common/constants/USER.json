@@ -1,0 +1,42 @@
+{
+  "id": {
+    "label": "ユーザID",
+    "type": "id",
+    "require": true
+  },
+  "name": {
+    "label": "氏名",
+    "type": "string",
+    "require": true
+  },
+  "birthday": {
+    "label": "生年月日",
+    "type": "date",
+    "require": true
+  },
+  "gender": {
+    "label": "性別",
+    "type": "gender",
+    "require": false
+  },
+  "phone": {
+    "label": "電話番号",
+    "type": "phone",
+    "require": true
+  },
+  "email": {
+    "label": "メールアドレス",
+    "type": "email",
+    "require": false
+  },
+  "address": {
+    "label": "住所",
+    "type": "string",
+    "require": false
+  },
+  "authority": {
+    "label": "権限",
+    "type": "authority",
+    "require": true
+  }
+}
