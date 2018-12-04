@@ -14,7 +14,8 @@ const headerStyles = {
 const contentStyles = {
   flex: '1 1 auto',
   padding: '40px 30px',
-  overflow: 'auto',
+  overflowX: 'hidden',
+  overflowY: 'auto',
 };
 
 class Root extends Component {

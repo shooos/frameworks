@@ -99,7 +99,7 @@ class CardList extends Component {
           {list.map((user) => (
             <Card user={user} dispatch={dispatch} key={user.id} />
           ))}
-          {Array(6).map((e, i) => (
+          {Array.apply(null, Array(6)).map((e, i) => (
             <div className="ghost" key={i} />
           ))}
         </div>
