@@ -16,7 +16,7 @@ export default {
       users = JSON.parse(localStorage.getItem(USERS_STORAGE_KEY));
       users.sort((a, b) => new Intl.Collator().compare(a[sort.key], b[sort.key]) * (sort.order === 'desc' ? -1 : 1));
     } catch (e) {
-      throw e;
+      return [];
     }
 
     return users || [];

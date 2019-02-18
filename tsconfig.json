@@ -1,12 +1,15 @@
 {
   "compilerOptions": {
     "module": "CommonJS",
+    "rootDir": "src",
     "noImplicitAny": true,
     "noUnusedLocals": true,
     "removeComments": true,
+    "resolveJsonModule": true,
     "preserveConstEnums": true,
     "sourceMap": true,
     "strictNullChecks": true,
+    "experimentalDecorators": true,
     "plugins": [
       {
         "name": "typescript-tslint-plugin",
@@ -16,6 +19,7 @@
       }
     ]
   },
-  "include": ["./**/*"],
+  "include": ["src/angular/**/*"],
+  "exclude": ["node_modules", "**/*/*.spec.ts"],
   "lib": ["es2017", "dom"]
 }

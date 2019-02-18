@@ -2,6 +2,7 @@ const path = require('path');
 const {VueLoaderPlugin} = require('vue-loader');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const AppManifestWebpackPlugin = require('app-manifest-webpack-plugin');
+const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
 
 module.exports = {
   mode: 'development',
@@ -44,7 +45,7 @@ module.exports = {
         },
       },
       {
-        test: /.ts$/,
+        test: /\.ts$/,
         exclude: /node_modules/,
         loader: 'ts-loader',
       },
@@ -61,6 +62,9 @@ module.exports = {
 
   plugins: [
     new VueLoaderPlugin(),
+    new FilterWarningsPlugin({
+      exclude: /System.import/
+    }),
     new AppManifestWebpackPlugin({
       logo: 'favicon/32.png',
       inject: false,
