@@ -1,12 +1,7 @@
-import {User, Sort} from '../../Types';
-import {UsersActions, UsersActionTypes} from '../actions';
+import {UsersActions, UsersActionTypes} from '../actions/users.action';
+import {Users} from '../models/users.model';
 
-export interface State {
-  list: User[],
-  sort: Sort,
-}
-
-const initialState: State = {
+const initialState: Users = {
   list: [],
   sort: {
     key: 'id',
@@ -14,16 +9,13 @@ const initialState: State = {
   },
 };
 
-export function reducer(state = initialState, action: UsersActions): State {
+export function reducer(state: Users = initialState, action: UsersActions): Users {
   switch (action.type) {
-    case UsersActionTypes.GetSuccess:
-    case UsersActionTypes.SortSuccess:
+    case UsersActionTypes.GET_SUCCESS:
+    case UsersActionTypes.SORT_SUCCESS:
       return {...state, list: [...action.payload.users]};
 
     default:
       return state;
   }
 }
-
-export const getSort  = (state: State) => state.sort;
-export const getUsers = (state: State) => state.list;

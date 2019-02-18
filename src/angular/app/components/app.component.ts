@@ -1,8 +1,10 @@
 import {Component} from '@angular/core';
+import '../../../common/less/common.less';
 
 @Component({
-  selector: 'app',
-  templateUrl: './app.component.html',
-  styleUrls: ['../../../common/less/common.less'],
+  selector: 'app-root',
+  template: require('./app.component.html'),
 })
-export class AppComponent {}
+export class AppComponent {
+  title = 'Angular example';
+}

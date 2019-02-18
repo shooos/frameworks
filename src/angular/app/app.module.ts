@@ -1,17 +1,13 @@
-import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule} from '@angular/forms';
-import {UsersStoreModule} from './store/users-store.module';
+// import {StoreModule} from '@ngrx/store';
+// import {UsersStoreModule} from './store/users-store.module';
 import {AppComponent} from './components/app.component';
 
 @NgModule({
-  imports: [
-    BrowserModule,
-    FormsModule,
-    UsersStoreModule,
-  ],
-  declarations: [AppComponent],
+  imports: [BrowserModule, FormsModule /*, StoreModule.forRoot({}), UsersStoreModule*/],
   bootstrap: [AppComponent],
-  providers: [],
+  declarations: [AppComponent],
 })
 export class AppModule {}

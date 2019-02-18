@@ -1,16 +1,11 @@
-import {Injectable} from "@angular/core";
+import {Injectable} from '@angular/core';
 import {Action} from '@ngrx/store';
 import {Actions, Effect, ofType} from '@ngrx/effects';
 import {Observable, of} from 'rxjs';
 import {map, switchMap, catchError} from 'rxjs/operators';
 
 import {UsersService} from '../../services/users.service';
-import {
-  UsersActionTypes,
-  GetUsers,
-  GetSuccess,
-  GetFailure,
-} from '../actions/users.action';
+import {UsersActionTypes, GetUsers, GetSuccess, GetFailure} from '../actions/users.action';
 
 @Injectable()
 export class UsersEffects {
@@ -18,14 +13,15 @@ export class UsersEffects {
 
   @Effect()
   getUsers$: Observable<Action> = this.actions$.pipe(
-    ofType<GetUsers>(UsersActionTypes.GetUsers),
-    map(action => action.payload),
-    switchMap(payload => {
+    ofType<GetUsers>(UsersActionTypes.GET_USERS),
+    map((action) => action.payload),
+    switchMap((payload) => {
       const {sort} = payload;
       return this.usersService.getUsers(sort).pipe(
-        map(result => new GetSuccess({users: [...result]})),
-        catchError(error => of(new GetFailure({error})))
+        map((result) => new GetSuccess({users: [...result]})),
+        catchError((error) => of(new GetFailure({error})))
       );
+      return payload;
     })
   );
 

@@ -3,13 +3,15 @@ const {VueLoaderPlugin} = require('vue-loader');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const AppManifestWebpackPlugin = require('app-manifest-webpack-plugin');
 const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   mode: 'development',
   devtool: 'source-map',
 
   entry: {
-    angular: ['@babel/polyfill', path.join(__dirname, 'src/angular')],
+    'angular-polyfills': path.join(__dirname, 'src/angular/polyfills'),
+    angular: path.join(__dirname, 'src/angular'),
     react: ['@babel/polyfill', path.join(__dirname, 'src/react')],
     vue: ['@babel/polyfill', path.join(__dirname, 'src/vue')],
   },
@@ -57,13 +59,17 @@ module.exports = {
         test: /\.less$/,
         use: ['style-loader', 'css-loader', 'less-loader'],
       },
+      {
+        test: /\.html$/,
+        use: ['html-loader'],
+      },
     ],
   },
 
   plugins: [
     new VueLoaderPlugin(),
     new FilterWarningsPlugin({
-      exclude: /System.import/
+      exclude: /System.import/,
     }),
     new AppManifestWebpackPlugin({
       logo: 'favicon/32.png',
@@ -99,7 +105,7 @@ module.exports = {
         from: '*/*.html',
         to: '',
         force: true,
-        ignore: ['!*.html'],
+        ignore: ['!*.html', 'angular/**'],
       },
       {
         context: 'src',
@@ -108,5 +114,11 @@ module.exports = {
         force: true,
       },
     ]),
+    new HtmlWebpackPlugin({
+      filename: 'angular/index.html',
+      template: 'src/angular/index.html',
+      meta: {charset: 'UTF-8'},
+      chunks: ['angular-polyfills', 'angular'],
+    }),
   ],
 };
