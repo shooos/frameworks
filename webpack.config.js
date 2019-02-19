@@ -3,15 +3,13 @@ const {VueLoaderPlugin} = require('vue-loader');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const AppManifestWebpackPlugin = require('app-manifest-webpack-plugin');
 const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   mode: 'development',
   devtool: 'source-map',
 
   entry: {
-    'angular-polyfills': path.join(__dirname, 'src/angular/polyfills'),
-    angular: path.join(__dirname, 'src/angular'),
+    angular: ['@babel/polyfill', path.join(__dirname, 'src/angular/polyfills'), path.join(__dirname, 'src/angular')],
     react: ['@babel/polyfill', path.join(__dirname, 'src/react')],
     vue: ['@babel/polyfill', path.join(__dirname, 'src/vue')],
   },
@@ -105,7 +103,7 @@ module.exports = {
         from: '*/*.html',
         to: '',
         force: true,
-        ignore: ['!*.html', 'angular/**'],
+        ignore: ['!*.html'],
       },
       {
         context: 'src',
@@ -114,11 +112,5 @@ module.exports = {
         force: true,
       },
     ]),
-    new HtmlWebpackPlugin({
-      filename: 'angular/index.html',
-      template: 'src/angular/index.html',
-      meta: {charset: 'UTF-8'},
-      chunks: ['angular-polyfills', 'angular'],
-    }),
   ],
 };

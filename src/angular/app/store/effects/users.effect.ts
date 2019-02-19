@@ -21,7 +21,6 @@ export class UsersEffects {
         map((result) => new GetSuccess({users: [...result]})),
         catchError((error) => of(new GetFailure({error})))
       );
-      return payload;
     })
   );
 
