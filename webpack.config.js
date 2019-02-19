@@ -9,7 +9,7 @@ module.exports = {
   devtool: 'source-map',
 
   entry: {
-    angular: ['@babel/polyfill', path.join(__dirname, 'src/angular/polyfills'), path.join(__dirname, 'src/angular')],
+    angular: [path.join(__dirname, 'src/angular/polyfills'), path.join(__dirname, 'src/angular')],
     react: ['@babel/polyfill', path.join(__dirname, 'src/react')],
     vue: ['@babel/polyfill', path.join(__dirname, 'src/vue')],
   },
