@@ -9,6 +9,7 @@
     "noUnusedLocals": true,
     "removeComments": true,
     "resolveJsonModule": true,
+    "esModuleInterop": true,
     "preserveConstEnums": true,
     "lib": ["es2015", "dom"],
     "sourceMap": true,
