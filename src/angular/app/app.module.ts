@@ -5,11 +5,18 @@ import {StoreModule} from '@ngrx/store';
 import {EffectsModule} from '@ngrx/effects';
 
 import {reducer} from './store/reducers/users.reducer';
-import {TestEffects} from './store/effects/test.effects';
 import {AppComponent} from './components/app.component';
+import {UsersEffects} from './store/effects/users.effect';
 
 @NgModule({
-  imports: [BrowserModule, FormsModule, StoreModule.forRoot({Users: reducer}), EffectsModule.forRoot([TestEffects])],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    StoreModule.forRoot({
+      Users: reducer,
+    }),
+    EffectsModule.forRoot([UsersEffects]),
+  ],
   bootstrap: [AppComponent],
   declarations: [AppComponent],
   providers: [],
