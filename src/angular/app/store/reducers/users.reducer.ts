@@ -1,5 +1,6 @@
 import {UsersActions, UsersActionTypes} from '../actions/users.action';
 import {Users} from '../models/users.model';
+import {createSelector, createFeatureSelector} from '@ngrx/store';
 
 const initialState: Users = {
   list: [],
@@ -19,3 +20,6 @@ export function reducer(state: Users = initialState, action: UsersActions): User
       return state;
   }
 }
+
+export const getFeatureState = createFeatureSelector<Users>('Users');
+export const getSort = createSelector(getFeatureState, (state) => state.sort);
