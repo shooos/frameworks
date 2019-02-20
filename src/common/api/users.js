@@ -24,7 +24,7 @@ export default {
 
   async pushUser(user) {
     try {
-      const users = JSON.parse(localStorage.getItem(USERS_STORAGE_KEY));
+      const users = JSON.parse(localStorage.getItem(USERS_STORAGE_KEY)) || [];
       users.push(user);
       await saveUsers(users);
     } catch (e) {
