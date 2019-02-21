@@ -11,4 +11,10 @@ export class AppComponent {
     minHeight: '60px',
     flexBasis: '60px',
   };
+  contentStyles = {
+    flex: '1 1 auto',
+    padding: '40px 30px',
+    overflowX: 'hidden',
+    overflowY: 'auto',
+  };
 }

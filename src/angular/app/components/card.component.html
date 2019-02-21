@@ -1,0 +1,18 @@
+<div class="card-container">
+  <div *ngFor="let user of users$ | async">
+    <p *ngFor="let item of items" [ngClass]="item">
+      <template *ngIf="item !== 'gender' && item !== 'authority'">{{user[item]}}</template>
+      <span *ngIf="item === 'gender'" [ngClass]="user[item]"></span>
+      <span *ngIf="item === 'authority'" [ngClass]="user[item]" [attr.title]="user[item]"></span>
+    </p>
+    <span class="remove" [attr.title]="LABELS.REMOVE_USER" (click)="removeUser(user.id)"></span>
+  </div>
+  <div class="ghost" *ngFor="let ghost of Array(6)"></div>
+</div>
+<div class="sorter">
+  <span *ngFor="let item of items" [class.sorted]="item === (sort$ | async).key" (click)="execSort(item)">
+    <span *ngIf="item === (sort$ | async).key" class="icon" [ngClass]="(sort$ | async).order"></span>
+    {{USER[item].label}}
+  </span>
+</div>
+<!-- <div class="indicator" v-show="indicator"></div> -->

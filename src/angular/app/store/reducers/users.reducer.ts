@@ -23,3 +23,4 @@ export function reducer(state: Users = initialState, action: UsersActions): User
 
 export const getFeatureState = createFeatureSelector<Users>('Users');
 export const getSort = createSelector(getFeatureState, (state) => state.sort);
+export const getList = createSelector(getFeatureState, (state) => state.list);

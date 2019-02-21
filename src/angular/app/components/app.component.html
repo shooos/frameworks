@@ -1,4 +1,6 @@
 <div class="page">
   <div app-header [ngStyle]="headerStyle"></div>
-  <router-outlet></router-outlet>
+  <div style="position: relative;" [ngStyle]="contentStyles">
+    <router-outlet></router-outlet>
+  </div>
 </div>

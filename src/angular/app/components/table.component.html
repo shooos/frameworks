@@ -1,23 +1,21 @@
-<div style="position: relative;" [ngStyle]="styles">
-  <table class="users-table">
-    <thead>
-      <tr>
-        <th *ngFor="let item of items" (click)="execSort(item);">
-          {{USER[item].label}}
-          <span class="sort" [class.hidden]="sort.key !== item" [class.asc]="sort.order === 'asc'"
-            [class.desc]="sort.order === 'desc'"></span>
-        </th>
-        <th>{{LABELS.REMOVE_USER}}</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let user of users">
-        <td *ngFor="let item of items">{{user[item]}}</td>
-        <td class="remove">
-          <span [attr.title]="LABELS.REMOVE_USER" (click)="removeUser(user.id)"></span>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  <!-- <div class="indicator" v-show="indicator"></div> -->
-</div>
+<table class="users-table">
+  <thead>
+    <tr>
+      <th *ngFor="let item of items" (click)="execSort(item);">
+        {{USER[item].label}}
+        <span class="sort" [class.hidden]="item !== (sort$ | async).key" [class.asc]="'asc' === (sort$ | async).order"
+          [class.desc]="'desc' === (sort$ | async).order"></span>
+      </th>
+      <th>{{LABELS.REMOVE_USER}}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users$ | async">
+      <td *ngFor="let item of items">{{user[item]}}</td>
+      <td class="remove">
+        <span [attr.title]="LABELS.REMOVE_USER" (click)="removeUser(user.id)"></span>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<!-- <div class="indicator" v-show="indicator"></div> -->
