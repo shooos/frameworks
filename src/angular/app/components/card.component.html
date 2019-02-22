@@ -1,13 +1,13 @@
 <div class="card-container">
   <div *ngFor="let user of users$ | async">
-    <p *ngFor="let item of items" [ngClass]="item">
-      <template *ngIf="item !== 'gender' && item !== 'authority'">{{user[item]}}</template>
+    <p *ngFor="let item of items" [ngClass]="item" [attr.data-test]="user[item]">
+      <ng-container *ngIf="item !== 'gender' && item !== 'authority'">{{user[item]}}</ng-container>
       <span *ngIf="item === 'gender'" [ngClass]="user[item]"></span>
       <span *ngIf="item === 'authority'" [ngClass]="user[item]" [attr.title]="user[item]"></span>
     </p>
     <span class="remove" [attr.title]="LABELS.REMOVE_USER" (click)="removeUser(user.id)"></span>
   </div>
-  <div class="ghost" *ngFor="let ghost of Array(6)"></div>
+  <div class="ghost" *ngFor="let ghost of ghosts"></div>
 </div>
 <div class="sorter">
   <span *ngFor="let item of items" [class.sorted]="item === (sort$ | async).key" (click)="execSort(item)">
@@ -15,4 +15,4 @@
     {{USER[item].label}}
   </span>
 </div>
-<!-- <div class="indicator" v-show="indicator"></div> -->
+<div class="indicator" *ngIf="indicator"></div>

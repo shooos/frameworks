@@ -18,6 +18,7 @@ export class TableComponent {
   items = Object.keys(USER);
   users$: Observable<User[]>;
   sort$: Observable<Sort>;
+  indicator = false;
 
   ngOnInit() {
     this.sort$ = this.store.pipe(select(fromUsers.getSort));
