@@ -1,5 +1,5 @@
 import {Action} from '@ngrx/store';
-import {Sort, User} from '../../Types';
+import {Sort, User, SortKey} from '../../Types';
 
 export enum UsersActionTypes {
   GET_USERS = '[Users] Get',
@@ -12,8 +12,8 @@ export enum UsersActionTypes {
   REMOVE_SUCCESS = '[Users] RemoveSuccess',
   REMOVE_FAILURE = '[Users] RemoveFailure',
   SORT_USERS = '[Users] Sort',
-  SORT_SUCCESS = '[Users] SortSuccess',
-  SORT_FAILURE = '[Users] SortFailure',
+  // SORT_SUCCESS = '[Users] SortSuccess',
+  // SORT_FAILURE = '[Users] SortFailure',
 }
 
 export class GetUsers implements Action {
@@ -47,7 +47,7 @@ export class AppendFailure implements Action {
 
 export class RemoveUser implements Action {
   readonly type = UsersActionTypes.REMOVE_USER;
-  constructor(public payload: {id: String}) {}
+  constructor(public payload: {id: string}) {}
 }
 
 export class RemoveSuccess implements Action {
@@ -61,18 +61,18 @@ export class RemoveFailure implements Action {
 
 export class SortUsers implements Action {
   readonly type = UsersActionTypes.SORT_USERS;
-  constructor(public payload: {key: String}) {}
+  constructor(public payload: {key: SortKey}) {}
 }
 
-export class SortSuccess implements Action {
-  readonly type = UsersActionTypes.SORT_SUCCESS;
-  constructor(public payload: {users: User[]}) {}
-}
+// export class SortSuccess implements Action {
+//   readonly type = UsersActionTypes.SORT_SUCCESS;
+//   constructor(public payload: {users: User[]}) {}
+// }
 
-export class SortFailure implements Action {
-  readonly type = UsersActionTypes.SORT_FAILURE;
-  constructor(public payload?: {error: Error}) {}
-}
+// export class SortFailure implements Action {
+//   readonly type = UsersActionTypes.SORT_FAILURE;
+//   constructor(public payload?: {error: Error}) {}
+// }
 
 export type UsersActions =
   | GetUsers
@@ -84,6 +84,6 @@ export type UsersActions =
   | RemoveUser
   | RemoveSuccess
   | RemoveFailure
-  | SortUsers
-  | SortSuccess
-  | SortFailure;
+  | SortUsers;
+// | SortSuccess
+// | SortFailure;

@@ -5,7 +5,16 @@ import {Observable, of} from 'rxjs';
 import {map, switchMap, catchError} from 'rxjs/operators';
 
 import {UsersService} from '../../services/users.service';
-import {UsersActionTypes, GetUsers, GetSuccess, GetFailure} from '../actions/users.action';
+import {
+  UsersActionTypes,
+  GetUsers,
+  GetSuccess,
+  GetFailure,
+  SortUsers,
+  RemoveUser,
+  RemoveSuccess,
+  RemoveFailure,
+} from '../actions/users.action';
 
 @Injectable()
 export class UsersEffects {
@@ -33,4 +42,17 @@ export class UsersEffects {
   //     return this.usersService.pushUser(user).pipe();
   //   })
   // )
+
+  @Effect()
+  removeUser$: Observable<Action> = this.actions$.pipe(
+    ofType<RemoveUser>(UsersActionTypes.REMOVE_USER),
+    map((action) => action.payload),
+    switchMap((payload) => {
+      const {id} = payload;
+      return this.usersService.removeUser(id).pipe(
+        map(() => new RemoveSuccess()),
+        catchError((error) => of(new RemoveFailure({error})))
+      );
+    })
+  );
 }

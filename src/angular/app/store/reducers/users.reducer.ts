@@ -13,8 +13,10 @@ const initialState: Users = {
 export function reducer(state: Users = initialState, action: UsersActions): Users {
   switch (action.type) {
     case UsersActionTypes.GET_SUCCESS:
-    case UsersActionTypes.SORT_SUCCESS:
       return {...state, list: [...action.payload.users]};
+
+    case UsersActionTypes.SORT_USERS:
+      return {...state, sort: {order: state.sort.order === 'asc' ? 'desc' : 'asc', key: action.payload.key}};
 
     default:
       return state;
@@ -22,5 +24,11 @@ export function reducer(state: Users = initialState, action: UsersActions): User
 }
 
 export const getFeatureState = createFeatureSelector<Users>('Users');
-export const getSort = createSelector(getFeatureState, (state) => state.sort);
-export const getList = createSelector(getFeatureState, (state) => state.list);
+export const getSort = createSelector(
+  getFeatureState,
+  (state) => state.sort
+);
+export const getList = createSelector(
+  getFeatureState,
+  (state) => state.list
+);
