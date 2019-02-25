@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
-import {Action} from '@ngrx/store';
+import {Action, Store} from '@ngrx/store';
 import {Actions, Effect, ofType} from '@ngrx/effects';
-import {Observable, of} from 'rxjs';
-import {map, switchMap, catchError} from 'rxjs/operators';
+import {Observable, of, forkJoin} from 'rxjs';
+import {map, switchMap, catchError, withLatestFrom} from 'rxjs/operators';
 
 import {UsersService} from '../../services/users.service';
 import {
@@ -10,16 +10,17 @@ import {
   GetUsers,
   GetSuccess,
   GetFailure,
-  SortUsers,
   RemoveUser,
   RemoveSuccess,
   RemoveFailure,
+  AppendSuccess,
+  AppendFailure,
+  AppendUser,
 } from '../actions/users.action';
+import {Users} from '../models/users.model';
 
 @Injectable()
 export class UsersEffects {
-  constructor(private actions$: Actions, private usersService: UsersService) {}
-
   @Effect()
   getUsers$: Observable<Action> = this.actions$.pipe(
     ofType<GetUsers>(UsersActionTypes.GET_USERS),
@@ -33,26 +34,32 @@ export class UsersEffects {
     })
   );
 
-  // @Effect()
-  // appendUser$: Observable<Action> = this.actions$.pipe(
-  //   ofType<AppendUser>(UsersActionTypes.AppendUser),
-  //   map(action => action.payload),
-  //   concatMap(payload => {
-  //     const {user} = payload;
-  //     return this.usersService.pushUser(user).pipe();
-  //   })
-  // )
+  @Effect()
+  appendUser$: Observable<Action> = this.actions$.pipe(
+    ofType<AppendUser>(UsersActionTypes.APPEND_USER),
+    withLatestFrom(this.store$.select((state) => state.sort)),
+    switchMap(([action, sort]) => forkJoin([of(sort), this.usersService.pushUser(action.payload.user)])),
+    switchMap(([sort]) => {
+      return this.usersService.getUsers(sort).pipe(
+        map((result) => new AppendSuccess({users: [...result]})),
+        catchError((error) => of(new AppendFailure({error})))
+      );
+    })
+  );
 
   @Effect()
   removeUser$: Observable<Action> = this.actions$.pipe(
     ofType<RemoveUser>(UsersActionTypes.REMOVE_USER),
-    map((action) => action.payload),
-    switchMap((payload) => {
-      const {id} = payload;
-      return this.usersService.removeUser(id).pipe(
-        map(() => new RemoveSuccess()),
+    withLatestFrom(this.store$.select((state) => state.sort)),
+    switchMap(([action, sort]) => forkJoin([of(sort), this.usersService.removeUser(action.payload.id)])),
+    switchMap(([sort]) => {
+      console.log('getUsers: ', sort);
+      return this.usersService.getUsers(sort).pipe(
+        map((result) => new RemoveSuccess({users: [...result]})),
         catchError((error) => of(new RemoveFailure({error})))
       );
     })
   );
+
+  constructor(private actions$: Actions, private store$: Store<Users>, private usersService: UsersService) {}
 }

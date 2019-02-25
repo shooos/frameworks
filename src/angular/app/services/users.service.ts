@@ -52,7 +52,7 @@ export class UsersService {
   _saveUsers(users: User[]): Observable<void> {
     try {
       localStorage.setItem(UsersService.USERS_STORAGE_KEY, JSON.stringify(users));
-      return Observable.create((observer: any) => observer.complete());
+      return Observable.FromAsync((observer: any) => observer.complete());
     } catch (e) {
       throw e;
     }
