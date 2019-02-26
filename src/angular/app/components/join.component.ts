@@ -70,7 +70,10 @@ export class JoinComponent {
     if (this.form && this.form.reportValidity()) {
       this.store$.dispatch(new AppendUser({user: this.userInfo}));
       this.close();
-      Object.keys(this.userInfo).forEach((key: UserInfoKey) => (this.userInfo[key] = ''));
+      Object.keys(this.userInfo).forEach((key: UserInfoKey) => {
+        this.userInfo[key] = '';
+        this.joinForm.controls[key].setValue('');
+      });
     }
   }
 
