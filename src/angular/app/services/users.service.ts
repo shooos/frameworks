@@ -53,7 +53,7 @@ export class UsersService {
     try {
       localStorage.setItem(UsersService.USERS_STORAGE_KEY, JSON.stringify(users));
       return Observable.create((observer: any) => {
-        observer.next();
+        observer.next(); // 何も返す気がなくてもこれ必須
         observer.complete();
       });
     } catch (e) {

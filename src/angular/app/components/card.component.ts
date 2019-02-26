@@ -37,7 +37,12 @@ export class CardComponent {
   }
 
   removeUser(id: string) {
-    this.store.dispatch(new RemoveUser({id}));
+    this.indicator = true;
+
+    setTimeout(() => {
+      this.store.dispatch(new RemoveUser({id}));
+      this.indicator = false;
+    }, 0);
   }
 
   constructor(private store: Store<Users>) {}
