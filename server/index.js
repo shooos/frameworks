@@ -4,7 +4,7 @@ const app = express();
 
 app.use(express.static(path.join(__dirname, '../dist')));
 
-const server = app.listen(8080, () => {
+const server = app.listen(process.env.PORT || 8080, () => {
   console.log('Node.js is listening to PORT:' + server.address().port);
 });
 
