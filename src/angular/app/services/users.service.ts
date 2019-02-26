@@ -8,16 +8,18 @@ import {Sort, User} from '../Types';
 export class UsersService {
   private static USERS_STORAGE_KEY = 'users';
 
-  constructor() {}
-
   getUsers(sort: Sort): Observable<User[]> {
     try {
       const json = localStorage.getItem(UsersService.USERS_STORAGE_KEY) || '[]';
       const users: User[] = JSON.parse(json);
-      users.sort(
-        (a, b) =>
-          new Intl.Collator().compare(a[sort.key].toString(), b[sort.key].toString()) * (sort.order === 'desc' ? -1 : 1)
-      );
+      users.sort((a, b) => {
+        const aval = a[sort.key];
+        const aa = aval ? aval.toString() : '';
+        const bval = b[sort.key];
+        const bb = bval ? bval.toString() : '';
+
+        return new Intl.Collator().compare(aa, bb) * (sort.order === 'desc' ? -1 : 1);
+      });
 
       return Observable.create((observer: any) => {
         observer.next(users);
@@ -33,7 +35,7 @@ export class UsersService {
       const json = localStorage.getItem(UsersService.USERS_STORAGE_KEY) || '[]';
       const users = JSON.parse(json);
       users.push(user);
-      return this._saveUsers(users);
+      return this.saveUsers(users);
     } catch (e) {
       throw e;
     }
@@ -43,13 +45,13 @@ export class UsersService {
     try {
       const json = localStorage.getItem(UsersService.USERS_STORAGE_KEY) || '[]';
       const users = JSON.parse(json);
-      return this._saveUsers(users.filter((user: User) => user.id !== id));
+      return this.saveUsers(users.filter((user: User) => user.id !== id));
     } catch (e) {
       throw e;
     }
   }
 
-  _saveUsers(users: User[]): Observable<void> {
+  private saveUsers(users: User[]): Observable<void> {
     try {
       localStorage.setItem(UsersService.USERS_STORAGE_KEY, JSON.stringify(users));
       return Observable.create((observer: any) => {

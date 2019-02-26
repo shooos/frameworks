@@ -1,5 +1,5 @@
 import {Action} from '@ngrx/store';
-import {Sort, User, SortKey} from '../../Types';
+import {Sort, User, UserInfoKey} from '../../Types';
 
 export enum UsersActionTypes {
   GET_USERS = '[Users] Get',
@@ -61,7 +61,7 @@ export class RemoveFailure implements Action {
 
 export class SortUsers implements Action {
   readonly type = UsersActionTypes.SORT_USERS;
-  constructor(public payload: {key: SortKey}) {}
+  constructor(public payload: {key: UserInfoKey}) {}
 }
 
 export type UsersActions =
