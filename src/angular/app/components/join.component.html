@@ -1,13 +1,13 @@
 <div class="join" [class.open]="isOpen" (transitionend)="buttonChange()">
-  <form name="user-info" (submit)="$event.preventDefault(); $event.stopPropagation();">
+  <form [formGroup]="joinForm" (submit)="$event.preventDefault(); $event.stopPropagation();">
     <div class="items" *ngFor="let item of items">
       <span *ngIf="USER[item].require" class="require">*</span>
       <label>{{USER[item].label}}</label>
-      <input (input)="inputInfo(item, $event)" [formControl]="{{userInfo[item]}}" [attr.name]="{{item}}">
+      <input (input)="inputInfo(item, $event)" [formControlName]="item" [attr.name]="item">
     </div>
   </form>
-  <div class="btn-join" (mousedown)="open()" ngIf="button === 'open'"></div>
-  <div class="btn-register" ngIf="button === 'register'">
+  <div class="btn-join" (mousedown)="open()" *ngIf="button === 'open'"></div>
+  <div class="btn-register" *ngIf="button === 'register'">
     <span class="cancel" (mousedown)="close()"></span>
     <span class="register" (click)="register()"></span>
   </div>

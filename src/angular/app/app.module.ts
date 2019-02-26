@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-import {FormsModule} from '@angular/forms';
+import {ReactiveFormsModule} from '@angular/forms';
 import {StoreModule} from '@ngrx/store';
 import {EffectsModule} from '@ngrx/effects';
 import {APP_BASE_HREF} from '@angular/common';
@@ -14,11 +14,13 @@ import {HeaderComponent} from './components/header.component';
 import {TableComponent} from './components/table.component';
 import {SwitcherComponent} from './components/switcher.component';
 import {CardComponent} from './components/card.component';
+import {JoinComponent} from './components/join.component';
 
 @NgModule({
   imports: [
     BrowserModule,
-    FormsModule,
+    // FormsModule,
+    ReactiveFormsModule,
     StoreModule.forRoot({
       Users: reducer,
     }),
@@ -26,7 +28,7 @@ import {CardComponent} from './components/card.component';
     AppRoutingModule,
   ],
   bootstrap: [AppComponent],
-  declarations: [AppComponent, HeaderComponent, SwitcherComponent, TableComponent, CardComponent],
+  declarations: [AppComponent, HeaderComponent, SwitcherComponent, JoinComponent, TableComponent, CardComponent],
   providers: [{provide: APP_BASE_HREF, useValue: '/angular'}],
 })
 export class AppModule {}

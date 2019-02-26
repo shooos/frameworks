@@ -1,9 +1,11 @@
 import {Component} from '@angular/core';
+import {FormBuilder, FormGroup} from '@angular/forms';
 
 import USER from '../../../common/constants/USER.json';
+import 'common/less/join.less';
 
 @Component({
-  selector: '[app-join]',
+  selector: 'app-join',
   template: require('./join.component.html'),
 })
 export class JoinComponent {
@@ -12,13 +14,16 @@ export class JoinComponent {
   isOpen = false;
   button = 'open';
   userInfo: {[key: string]: any} = {};
-  form: HTMLFormElement;
+  joinForm: FormGroup;
 
-  ngAfterViewInit() {
-    this.form = document.getElementsByName('user-info')[0] as HTMLFormElement;
+  ngOnInit() {
+    this.joinForm = this.builder.group(
+      this.items.reduce((acc: {[key: string]: any}, key) => {
+        acc[key] = [''];
+        return acc;
+      }, {})
+    );
   }
-
-  buttonChange() {}
 
   inputInfo(key: string, e: Event) {
     if (!e.target) return;
@@ -34,9 +39,22 @@ export class JoinComponent {
     // }
   }
 
-  open() {}
+  open() {
+    this.isOpen = true;
+  }
 
-  close() {}
+  close() {
+    this.isOpen = false;
+    this.button = 'open';
+  }
+
+  buttonChange() {
+    if (this.isOpen) {
+      this.button = 'register';
+    }
+  }
 
   register() {}
+
+  constructor(private builder: FormBuilder) {}
 }
