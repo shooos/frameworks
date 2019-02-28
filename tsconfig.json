@@ -12,7 +12,7 @@
     "esModuleInterop": true,
     "preserveConstEnums": true,
     "lib": ["es2015", "dom"],
-    "sourceMap": true,
+    "sourceMap": false,
     "strictNullChecks": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,

@@ -5,13 +5,13 @@ const AppManifestWebpackPlugin = require('app-manifest-webpack-plugin');
 const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
 
 module.exports = {
-  mode: 'development',
-  devtool: 'source-map',
+  mode: 'production',
 
   entry: {
     angular: [path.join(__dirname, 'src/angular/polyfills'), path.join(__dirname, 'src/angular')],
     react: ['@babel/polyfill', path.join(__dirname, 'src/react')],
     vue: ['@babel/polyfill', path.join(__dirname, 'src/vue')],
+    'test-data': path.join(__dirname, 'src/common/test-data.js'),
   },
 
   output: {

@@ -6,14 +6,15 @@ body {
   margin: 0;
   height: 100%;
   overflow: hidden;
+  font-family: '游ゴシック Medium', 'Yu Gothic Medium', '游ゴシック体', YuGothic, sans-serif;
 }
 .center {
-  margin: 0;
   position: fixed;
-  top: 30%;
+  top: 50%;
   left: 50%;
-  margin-right: -50%;
   transform: translate(-50%, -50%);
+}
+.menu {
   box-shadow: 0 0 3px 2px rgba(0, 0, 0, 0.4);
   font-size: 2rem;
   border-radius: 2px;
@@ -22,7 +23,10 @@ body {
 dl {
   margin: 0;
 }
-dt > a {
+dd {
+  margin: 0;
+}
+dd > a {
   color: #666;
   cursor: pointer;
   display: inline-block;
@@ -31,11 +35,11 @@ dt > a {
   transition: background-color 0.3s linear, color 0.3s linear, opacity 0.3s linear;
   width: calc(100% - 26rem);
 }
-dt > a:hover {
+dd > a:hover {
   background-color: #eee;
   color: #333;
 }
-dt > a:hover > .logo {
+dd > a:hover > .logo {
   opacity: 1;
 }
 .logo {
@@ -59,6 +63,43 @@ dt > a:hover > .logo {
 }
 .vue {
   background-image: url('images/vue-logo.png');
+}
+
+.test-data {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.2rem;
+}
+
+.test-data > a {
+  display: inline-block;
+  padding: 10px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.toast {
+  user-select: none;
+  pointer-events: none;
+  position: fixed;
+  bottom: 10%;
+  left: 50%;
+  background-color: rgba(200, 200, 200, 0.6);
+  padding: 0.5rem 1.3rem;
+  font-size: 1.3rem;
+  box-shadow: 1px 1px 3px rgba(200, 200, 200, 0.2);
+  border-radius: 1rem;
+
+  transition: all 0.35s ease-in-out;
+  opacity: 0;
+  transform: translate(-50%, 20px);
+}
+
+.toast.ching {
+  transform: translate(-50%, 0);
+  opacity: 1;
 }
 
 .credits {

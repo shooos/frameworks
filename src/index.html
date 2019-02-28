@@ -7,20 +7,25 @@
 </head>
 
 <body>
-  <div class="center">
+  <nav class="center menu">
     <dl>
-      <dt>
+      <dd>
         <a href="angular"><span class="logo angular"></span>Angular</a>
-      </dt>
-      <dt>
+      </dd>
+      <dd>
         <a href="react"><span class="logo react"></span>React</a>
-      </dt>
-      <dt>
+      </dd>
+      <dd>
         <a href="vue"><span class="logo vue"></span>Vue</a>
-      </dt>
+      </dd>
     </dl>
-  </div>
+  </nav>
+  <div class="toast"></div>
+  <aside class="test-data">
+    <a onclick="pourIn()">TESTデータ を流し込む</a>/<a onclick="discard()">カラにする</a>
+  </aside>
   <a class="credits" href="credits.html">Credits</a>
+  <script src="test-data/index.js"></script>
 </body>
 
 </html>
