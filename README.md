@@ -1,13 +1,9 @@
-# 起動環境
+[https://frameworks-example.herokuapp.com/](https://frameworks-example.herokuapp.com/)
 
-Node.js v10.13.0 以上推奨
-npm v6.4.1 以上推奨
+# 動作環境
 
-※ Windows 以外での起動は未確認です
-
-# 起動方法
-
-`$ npm run start`
+Node.js v10.15.2  
+npm v6.4.1  
 
 # 概要
 
@@ -20,3 +16,6 @@ npm v6.4.1 以上推奨
   - React + Redux の組み合わせによって構築されています。
 - Vue
   - Vue.js + Vuex の組み合わせによって構築されています。
+
+画面下部のリンクからテストデータの投入と削除ができます。  
+※ テストデータの内容はすべて架空のものであり、実在の人物とは無関係です。  
